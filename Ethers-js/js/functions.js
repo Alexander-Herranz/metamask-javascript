@@ -84,7 +84,7 @@ export async function getNumber() {
 
   } catch (error) {
     console.error(error);
-    
+
     throw error;
   }
 
