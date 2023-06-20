@@ -11,70 +11,64 @@
   <script src="https://cdn.jsdelivr.net/npm/vanillajs@1.0.1/dest/cjs/index.min.js"></script>
   -->
 
-
   <!-- ETHERS 5 (JAVASCRIPT) -->
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
-  <!-- <script src="./js/functions.js" type='module'></script>-->
+
 
 </head>
 
 <body>
   <div class="container">
     <h1>Functions</h1>
-    <!-- <h2 id="mensaje">Se envió la cantidad de BNB.</h2> -->
 
-    <div id="payform">
+    <div id="sign_area">
 
-<!--
       <label id="sign_label">Sign with Metamask</label>
+      <br>
+      <input id="sign_input" placeholder="Enter message to sign." type="text">
       <button id="sign_btn">Signature</button>
--->
+      <br>
+      <br>
+      <label id="sign_output"></label>
+    </div>
+
+    </br>
+    </br>
+
+    <div id="input_area">
+      <label id="input_label">Number Input:</label>
+      <br>
+      <input id="setNumber_input" placeholder="Number" type="number">
+      <button id="setNumber_btn">Enter a Number</button>
+    </div>
+
+    </br>
     </br>
 
 
-  </br>
-      <input id="myNumber" placeholder="Number" type="number">
-      <button id="setNumber_btn">New Number</button>
-      </br>
-      </br>
-
-
-<!--
-    <label id="sign_label">Sign with Metamask</label>
-  -->
-    </br>
-    <label id="resultNumber"></label>
+    <div id="result_area">
+      <label id="result_label">Number Output:</label>
       <button id="getNumber_btn">Get Number</button> </br>
-      </br>
-      </br>
-
-<!--
-      <input id="myString" placeholder="Text" type="text">
-      <button id="setString_btn">New Text</button>
-    </br>
-      </br>
-
-      <label id="resultText"></label>
-      <button id="GetString_btn">Get Text</button> </br>
-      </br>
-      </br>
-  -->
+      <br>
+      <label id="resultNumber"></label>
 
     </div>
-  </div>
+
+
+    </br>
+    </br>
 
   </div>
 
 
   <script type="module">
-  import { setNumber, getNumber, sign } from "./js/functions.js";
+    import { setNumber, getNumber, sign } from "./js/functions.js";
 
-
-    document.getElementById("setNumber_btn").onclick = ()=> { setNumber() };
-
+    document.getElementById("setNumber_btn").onclick = ()=> { setNumber(document.getElementById("setNumber_input").value) };
     document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber() };
 
-    //document.getElementById("sign_btn").onclick = ()=> { sign() };
+    document.getElementById("sign_btn").onclick = async ()=> { document.getElementById("sign_output").innerHTML = "<b>Signature:</b> " + await sign(document.getElementById("sign_input").value) };
+
 
 
   </script>
