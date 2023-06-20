@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WEB3 JS</title>
+
+  <!-- ETHERS 5 (JAVASCRIPT) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.10.0/web3.min.js"></script>
+  <!-- <script src="./js/functions.js" type='module'></script>-->
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Mi primera DAPP en Web3 JS</h1>
+
+    <div id="payform">
+
+      </br>
+      <input id="myNumber" placeholder="Number" type="number">
+      <button id="setNumber_btn">New Number</button>
+
+      </br>
+      </br>
+      </br>
+
+      <label id="resultNumber"></label>
+      <button id="getNumber_btn">Get Number</button> </br>
+      </br>
+      </br>
+
+
+    </div>
+  </div>
+
+  </div>
+
+
+  <script type="module">
+
+    //import { setNumber, getNumber, sign } from "./js/functions.js";
+    import {initWeb3, getNumber, setNumber} from "./js/functions.js";
+
+    await initWeb3();
+    document.getElementById("setNumber_btn").onclick = ()=> { setNumber() };
+    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber() };
+
+      </script>
+
+
+
+</body>
+
+</html>

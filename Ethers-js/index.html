@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SMART CONTRACT JS TESTING</title>
+
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/vanillajs@1.0.1/dest/cjs/index.min.js"></script>
+  -->
+
+
+  <!-- ETHERS 5 (JAVASCRIPT) -->
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <!-- <script src="./js/functions.js" type='module'></script>-->
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Functions</h1>
+    <!-- <h2 id="mensaje">Se envió la cantidad de BNB.</h2> -->
+
+    <div id="payform">
+
+<!--
+      <label id="sign_label">Sign with Metamask</label>
+      <button id="sign_btn">Signature</button>
+-->
+    </br>
+
+
+  </br>
+      <input id="myNumber" placeholder="Number" type="number">
+      <button id="setNumber_btn">New Number</button>
+      </br>
+      </br>
+
+
+<!--
+    <label id="sign_label">Sign with Metamask</label>
+  -->
+    </br>
+    <label id="resultNumber"></label>
+      <button id="getNumber_btn">Get Number</button> </br>
+      </br>
+      </br>
+
+<!--
+      <input id="myString" placeholder="Text" type="text">
+      <button id="setString_btn">New Text</button>
+    </br>
+      </br>
+
+      <label id="resultText"></label>
+      <button id="GetString_btn">Get Text</button> </br>
+      </br>
+      </br>
+  -->
+
+    </div>
+  </div>
+
+  </div>
+
+
+  <script type="module">
+  import { setNumber, getNumber, sign } from "./js/functions.js";
+
+
+    document.getElementById("setNumber_btn").onclick = ()=> { setNumber() };
+
+    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber() };
+
+    //document.getElementById("sign_btn").onclick = ()=> { sign() };
+
+
+  </script>
+
+
+
+</body>
+
+</html>
