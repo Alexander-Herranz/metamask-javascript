@@ -15,43 +15,112 @@
 
 <body>
   <div class="container">
-    <h1>Mi primera DAPP en Web3 JS</h1>
+    <h1>Functions</h1>
 
-    <div id="payform">
+    <div id="sign_area">
 
-      </br>
-      <input id="myNumber" placeholder="Number" type="number">
-      <button id="setNumber_btn">New Number</button>
+      <label id="sign_label" ><b>Sign with Metamask</b></label>
+      <br>
+      <input id="sign_input" placeholder="Enter message to sign." type="text">
+      <button id="sign_btn">Signature</button>
+      <br>
+      <input id="sign_result_input" placeholder="Enter message to sign." type="text">
+      <button id="verify_btn">Verify signature</button>
 
-      </br>
-      </br>
-      </br>
+      <br>
+      <br>
+      <label id="sign_output"></label>
+    </div>
 
-      <label id="resultNumber"></label>
+    </br>
+    </br>
+
+    <div id="input_area">
+      <label id="input_label"><b>Number Input:</b></label>
+      <br>
+      <input id="setNumber_input" placeholder="Number" type="number">
+      <button id="setNumber_btn">Enter a Number</button>
+    </div>
+
+    </br>
+    </br>
+
+
+    <div id="getNumber_area">
+      <label id="result_label"><b>Number Output:</b></label>
       <button id="getNumber_btn">Get Number</button> </br>
+      <br>
+      <label id="getNumber_output"></label>
+
+    </div>
+
+
+    <div id="addNetwork_area">
+      <label id="network_label"><b>Networks in Metamask:</b></label>
+      <br><br>
+      <button id="addNetwork_btn">Add Network</button>
       </br>
+      <button id="switchNetwork_btn">Switch Network</button>
       </br>
+      <button id="checkNetwork_btn">Check Network</button>
+      </br>
+      <button id="addToken_btn">Add New Token</button>
 
 
     </div>
-  </div>
+
+
+    </br>
+    </br>
 
   </div>
 
 
   <script type="module">
 
-    //import { setNumber, getNumber, sign } from "./js/functions.js";
-    import {initWeb3, getNumber, setNumber} from "./js/functions.js";
+    import {
+      initWeb3,
+      setNumber,
+      getNumber
+    } from "./js/functions.js";
 
-    await initWeb3();
-    document.getElementById("setNumber_btn").onclick = ()=> { setNumber() };
-    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber() };
+    import {
+      addMetamaskNetwork,
+      switchMetamaskNetwork,
+      checkMetamaskNetwork,
+      addTokenMetamask,
+      signMessage,
+      verifyMessage
+    } from "./js/metamask-help.js";
 
-      </script>
+    const my_web3 = await initWeb3();
+
+    document.getElementById("setNumber_btn").onclick = ()=> { setNumber(my_web3, document.getElementById("setNumber_input").value) };
+    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("getNumber_output").innerHTML = await getNumber(my_web3) };
+
+
+    let chainId = '0x64';
+    let chainName = ' Gnosis Chain';
+    let coinName = 'xDai';
+    let coinSymbol = 'xDai';
+    let decimals = 18;
+    let rpcUrls = ['https://rpc.gnosischain.com'];
+    let blockExplorerUrls = ['https://blockscout.com/xdai/mainnet/'];
+
+    document.getElementById("addNetwork_btn").onclick = () => { addMetamaskNetwork(my_web3.web3, chainId, chainName, coinName, coinSymbol, decimals, rpcUrls, blockExplorerUrls) };
+    document.getElementById("switchNetwork_btn").onclick = () => { switchMetamaskNetwork(my_web3.web3, '11155111') };
+    document.getElementById("checkNetwork_btn").onclick = () => { checkMetamaskNetwork(my_web3.web3, '11155111', 'Red Sepolia Ethereum testnet') };
+    document.getElementById("addToken_btn").onclick = () => { addTokenMetamask() };
+
+    document.getElementById("sign_btn").onclick = async ()=> { document.getElementById("sign_output").innerHTML = "<b>Signature:</b> " + await signMessage(my_web3, document.getElementById("sign_input").value) };
+    document.getElementById("verify_btn").onclick = async ()=> { document.getElementById("sign_output").innerHTML = "<b>Result:</b> " + await verifyMessage(my_web3, document.getElementById("sign_input").value, document.getElementById("sign_result_input").value) };
+
+
+  </script>
 
 
 
 </body>
+
 
 </html>
