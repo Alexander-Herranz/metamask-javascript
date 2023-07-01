@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>SKILLER</title>
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+
+</head>
+
+
+<body>
+
+  <h1>Mi primera DAPP</h1>
+  <p>Conexión a un Smart Contract.</p>
+
+  <div>
+    <button id="getNumber_btn">GET NUMBER</button>
+    <label id=resultNumber></label>
+  </div>
+
+  <div>
+    <input id="set_number_input" type="number" placeholder="Enter a number"></input>
+    <button id="setNumber_btn">SET NUMBER</button>
+  </div>
+
+
+  <script type="module">
+
+    import {initWeb3, getNumber, setNumber} from "./funciones.js";
+
+    const addr_contract = "0x71b5ebCe1dd6f529E7DD4F3a8C2ccAD5e610b71E";
+
+    let my_web3 = await initWeb3(addr_contract);
+    console.log(my_web3);
+
+    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber(my_web3.contract) };
+    document.getElementById("setNumber_btn").onclick = async ()=> { setInput(my_web3) };
+
+    async function setInput(w3){
+      let inputVal = document.getElementById("set_number_input").value;
+      let res = await setNumber(w3, inputVal);
+
+    }
+
+</script>
+
+</body>
+
+</html>

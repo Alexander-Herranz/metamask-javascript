@@ -23,7 +23,7 @@
 
     <div id="sign_area">
 
-      <label id="sign_label"><b>Sign with Metamask</b>/label>
+      <label id="sign_label"><b>Sign with Metamask</b></label>
       <br>
       <input id="sign_input" placeholder="Enter message to sign." type="text">
       <button id="sign_btn">Signature</button>
@@ -55,18 +55,37 @@
     </div>
 
 
+    <div id="uniswap_area">
+      <label id="btcUsd_title"><b>Get BTC/$USD from Uniswap in real time:</b></label>
+      <button id="get_btcUsd_btn">BTC/USD $Price</button> </br>
+      <br>
+      <label id="btcUsd_result"></label>
+
+    </div>
+
+
     </br>
     </br>
 
   </div>
 
 
-  <script type="module">
-    import { setNumber, getNumber, sign } from "./js/functions.js";
+  <script type='module'>
+    import { initWeb3, setNumber, getNumber, sign } from './js/functions.js';
+    import abi from './js/abi.js';
+    import {getBTCPriceInUSDC} from './js/uniswap-help.js';
 
-    document.getElementById("setNumber_btn").onclick = ()=> { setNumber(document.getElementById("setNumber_input").value) };
-    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber() };
-    document.getElementById("sign_btn").onclick = async ()=> { document.getElementById("sign_output").innerHTML = "<b>Signature:</b> " + await sign(document.getElementById("sign_input").value) };
+    let addr_contract = '0x71b5ebCe1dd6f529E7DD4F3a8C2ccAD5e610b71E';
+
+    let w3 = await initWeb3(abi, addr_contract);
+    console.log(w3);
+
+    document.getElementById("setNumber_btn").onclick = ()=> { setNumber(w3, document.getElementById("setNumber_input").value) };
+    document.getElementById("getNumber_btn").onclick = async ()=> { document.getElementById("resultNumber").innerHTML = await getNumber(w3.sc) };
+    document.getElementById("sign_btn").onclick = async ()=> { document.getElementById("sign_output").innerHTML = "<b>Signature:</b> " + await sign(w3.web3, document.getElementById("sign_input").value) };
+
+
+    document.getElementById("get_btcUsd_btn").onclick = async ()=> { document.getElementById("btcUsd_result").innerHTML = await getBTCPriceInUSDC(w3.web3) };
 
   </script>
 

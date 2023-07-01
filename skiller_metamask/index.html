@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>SKILLER WEB3 JS</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.10.0/web3.min.js" type="application/javascript"></script>
+
+</head>
+
+
+<body>
+
+  <h1>My first Metamask Dapp</h1>
+  <p>Smart Contract Connection.</p>
+
+  <div>
+    <button id="addNet_btn">ADD Network</button>
+    <br><br>
+    <button id="swNet_btn">SWITCH Network</button>
+    <br><br>
+    <button id="addToken_btn">ADD Token</button>
+  </div>
+
+
+  <script type="module">
+
+    import {initWeb3, addNetwork, switchNetwork, addToken} from "./funciones.js";
+
+    //let my_web3 = await initWeb3();
+    //console.log(my_web3);
+    //console.log("Chain ID = 180 in HEX: " + my_web3.utils.toHex(180) );
+
+
+    document.getElementById("addNet_btn").onclick = async ()=> { addNetwork() };
+    document.getElementById("swNet_btn").onclick = async ()=> { switchNetwork() };
+    document.getElementById("addToken_btn").onclick = async ()=> { addToken() };
+
+
+</script>
+
+</body>
+
+</html>
